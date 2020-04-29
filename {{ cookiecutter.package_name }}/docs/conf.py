@@ -155,7 +155,6 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 
 
 # -- Options for the edit_on_github extension ---------------------------------
-
 if setup_cfg.get('edit_on_github').lower() == 'true':
 
     extensions += ['sphinx_astropy.ext.edit_on_github']
@@ -170,10 +169,9 @@ if setup_cfg.get('edit_on_github').lower() == 'true':
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
 # -- Turn on nitpicky mode for sphinx (to warn about references not found) ----
-#
-# nitpicky = True
-# nitpick_ignore = []
-#
+nitpicky = True
+nitpick_ignore = []
+
 # Some warnings are impossible to suppress, and you can list specific references
 # that should be ignored in a nitpick-exceptions file which should be inside
 # the docs/ directory. The format of the file should be:
