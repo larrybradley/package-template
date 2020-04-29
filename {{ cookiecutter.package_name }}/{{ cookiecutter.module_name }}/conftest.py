@@ -5,31 +5,23 @@
 
 import os
 
-from astropy.version import version as astropy_version
-
-# For Astropy 3.0 and later, we can use the standalone pytest plugin
-if astropy_version < '3.0':
-    from astropy.tests.pytest_plugins import *  # noqa
-    del pytest_report_header
+try:
+    from pytest_astropy_header.display import PYTEST_HEADER_MODULES, TESTED_VERSIONS
     ASTROPY_HEADER = True
-else:
-    try:
-        from pytest_astropy_header.display import PYTEST_HEADER_MODULES, TESTED_VERSIONS
-        ASTROPY_HEADER = True
-    except ImportError:
-        ASTROPY_HEADER = False
+except ImportError:
+    ASTROPY_HEADER = False
 
 
 def pytest_configure(config):
-
     if ASTROPY_HEADER:
-
         config.option.astropy_header = True
 
-        # Customize the following lines to add/remove entries from the list of
-        # packages for which version numbers are displayed when running the tests.
+        # Customize the following lines to add/remove entries from the
+        # list of packages for which version numbers are displayed when
+        # running the tests.
+        PYTEST_HEADER_MODULES['Astropy'] = 'astropy'
         PYTEST_HEADER_MODULES.pop('Pandas', None)
-        PYTEST_HEADER_MODULES['scikit-image'] = 'skimage'
+        PYTEST_HEADER_MODULES.pop('h5py', None)
 
         from . import __version__
         packagename = os.path.basename(os.path.dirname(__file__))
