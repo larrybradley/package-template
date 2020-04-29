@@ -6,7 +6,6 @@ include pyproject.toml
 
 recursive-include {{ cookiecutter.module_name }} *.pyx *.c *.pxd
 recursive-include docs *
-recursive-include licenses *
 recursive-include scripts *
 
 prune build
